@@ -1,3 +1,4 @@
+// @flow
 const bencode    = require('bencode');
 const SHA3       = require('sha3');
 const merkleTree = require('merkle-tree-zion-coin');
@@ -32,7 +33,7 @@ class Block {
     self.transactions = input.transactions;
   }
 
-  encodeBlock() {
+  encodeBlock(): string {
     const self = this;
 
     return bencode.encode({
@@ -42,7 +43,7 @@ class Block {
     });
   }
 
-  verify() {
+  verify(): bool {
     const self = this;
     // check the height is one greater than the parentBlock
 
@@ -94,7 +95,7 @@ module.exports = {
   BlockHeader
 }
 
-function doubleSha3(payload) {
+function doubleSha3(payload: string | Buffer): string {
   if (typeof payload === 'string')
     payload = Buffer.from(payload);
 

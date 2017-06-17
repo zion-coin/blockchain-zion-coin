@@ -1,3 +1,4 @@
+// @flow
 const levelup = require('levelup');
 const db      = levelup('~/.zion-coin/db');
 
@@ -5,29 +6,30 @@ const db      = levelup('~/.zion-coin/db');
   * In this case, we will be storing data using googles levelup
   * database. The key will be the blocks hash [doubleSha3(blockHeader)]
   * support for get, put, batch, del
+  * blocks are stored as bencoded dictionary strings
   *********************************************************************/
 
 
 class DB {
   constructor() {
-    
+
   }
 
-  put(hash, block) {
+  put(hash: string, block: string): null | error {
     db.put(hash, block, (err) => {
       if (err) return err;
       return null;
     });
   }
 
-  get(hash) {
+  get(hash: string): null | string {
     db.get(hash, (err, value) => {
       if (err) return err;
       return (null, value);
     });
   }
 
-  delete(hash) {
+  delete(hash: string): null | error {
     db.delete(hash, (err) => {
       if (err) return err;
       return null;
@@ -35,7 +37,7 @@ class DB {
   }
 
   // [ ['0x1a4...df2', { block data }], ['0xcb1...bb5', { block data }], ... ]
-  batchPut(hashValuePairs) {
+  batchPut(hashValuePairs: Array<Array<string>>) {
     hashes = hashes.map((hash) => {
       return { type: 'put', key: hash[0], value: hash[1] }
     });
