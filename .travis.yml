@@ -9,4 +9,4 @@ node_js:
   - "stable"
 
 script:
-  - npm run lint+build+test
+  - yarn run lint+build+test
