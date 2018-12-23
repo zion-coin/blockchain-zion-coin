@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "bencode": "^0.12.0",
-    "levelup": "^1.3.8",
+    "levelup": "^4.0.0",
     "merkle-tree-zion-coin": "^1.3.0",
     "miner-zion-coin": "^1.0.0"
   },
